@@ -1,7 +1,14 @@
 spring:
+  config:
+    import: vault://
   application:
     name: spring-boot-vault-sample
-vault:
-  uri: http://localhost:8200
-  token: my-root
-  authentication: TOKEN
+  cloud:
+    vault:
+      uri: http://localhost:8200
+      token: my-root
+      fail-fast: true
+      kv:
+        enabled: true
+        backend: secret
+        default-context: ${spring.application.name}
