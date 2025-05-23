@@ -5,11 +5,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class VaultDependantConfig {
+public class VaultedSecretsConfig {
 
     @Bean
-    public VaultedSecrets beanWithSecrets(@Value("${my.key1}") String secret1,
-                                          @Value("${my.key2}") String secret2) {
+    public VaultedSecrets vaultedSecrets(@Value("${my.key1}") String secret1,
+                                         @Value("${my.key2}") String secret2) {
         return new VaultedSecrets(secret1, secret2);
     }
 }

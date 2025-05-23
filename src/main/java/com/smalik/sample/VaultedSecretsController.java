@@ -4,11 +4,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class SecretsController {
+public class VaultedSecretsController {
 
     private final VaultedSecrets secrets;
 
-    public SecretsController(VaultedSecrets secrets) {
+    public VaultedSecretsController(VaultedSecrets secrets) {
         this.secrets = secrets;
     }
 
