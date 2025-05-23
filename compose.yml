@@ -8,3 +8,23 @@ services:
       VAULT_DEV_ROOT_TOKEN_ID: 'my-root'
     cap_add:
       - IPC_LOCK
+  health-checker:
+    image: maliksalman/jump:latest
+    command:
+      - sleep
+      - 16h
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://vault:8200/v1/sys/health"]
+      interval: 3s
+      timeout: 1s
+      retries: 10
+  add-secrets:
+    image: maliksalman/jump:latest
+    command:
+      - /workspace/add-secrets.sh
+      - vault
+    volumes:
+      - .:/workspace
+    depends_on:
+      health-checker:
+        condition: service_healthy
